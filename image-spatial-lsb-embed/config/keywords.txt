@@ -1,0 +1,8 @@
+steganography
+image
+spatial-domain
+lsb
+least-significant-bit
+python
+pillow
+numpy

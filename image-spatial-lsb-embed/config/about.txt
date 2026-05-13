@@ -1,0 +1,3 @@
+Giấu tin trong miền không gian ảnh bằng phương pháp LSB
+
+Lab này hướng dẫn sinh viên kiểm tra ảnh đầu vào, nhúng thông điệp vào bit ít quan trọng nhất của kênh màu, tạo ảnh stego và tách lại thông điệp để kiểm chứng.

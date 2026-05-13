@@ -1,0 +1,9 @@
+{
+  "mode": "permutation_pair_order",
+  "image": "output/input.png",
+  "channel_mode": "L",
+  "seed": 1337,
+  "message_length_bytes": 79,
+  "pair_count": 5000,
+  "output_stego": "work/stego.png"
+}

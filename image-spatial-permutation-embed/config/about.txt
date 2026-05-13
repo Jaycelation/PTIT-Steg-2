@@ -1,0 +1,3 @@
+Giấu tin trong miền không gian ảnh bằng phương pháp hoán vị điểm ảnh
+
+Lab này hướng dẫn sinh viên dùng quan hệ thứ tự của các cặp điểm ảnh để mã hóa bit, tạo ảnh stego và tách lại thông điệp bằng cùng kế hoạch hoán vị.

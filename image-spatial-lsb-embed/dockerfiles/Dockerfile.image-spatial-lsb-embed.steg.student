@@ -1,0 +1,36 @@
+ARG registry
+FROM $registry/labtainer.network2
+
+ARG lab
+ARG labdir
+ARG imagedir
+ARG user_name
+ARG password
+ARG apt_source
+ARG version
+LABEL version=$version
+ENV APT_SOURCE $apt_source
+RUN /usr/bin/apt-source.sh
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3 python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+RUN python3 -m pip install --no-cache-dir pillow numpy
+
+ADD $labdir/$imagedir/sys_$lab.tar.gz /
+ADD $labdir/sys_$lab.tar.gz /
+
+RUN useradd -ms /bin/bash $user_name \
+    && echo "$user_name:$password" | chpasswd \
+    && adduser $user_name sudo \
+    && mkdir -p /home/student/.local /home/student/.local/bin /home/student/.local/result \
+    && chown -R student:student /home/student/.local
+
+USER $user_name
+ENV HOME /home/$user_name
+ADD $labdir/$imagedir/home.tar $HOME
+ADD $labdir/$imagedir/$lab.tar.gz $HOME
+
+USER root
+RUN chown -R student:student /home/student
+CMD ["/bin/bash", "-c", "exec /sbin/init --log-target=journal 3>&1"]

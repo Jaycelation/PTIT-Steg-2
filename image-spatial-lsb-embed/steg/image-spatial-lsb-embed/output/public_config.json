@@ -1,0 +1,8 @@
+{
+  "mode": "lsb",
+  "image": "output/input.png",
+  "channel_mode": "RGB",
+  "bits_per_channel": 1,
+  "message_length_bytes": 64,
+  "output_stego": "work/stego.png"
+}

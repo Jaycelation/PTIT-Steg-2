@@ -1,0 +1,9 @@
+steganography
+image
+spatial-domain
+permutation
+pixel-pair
+pair-order
+python
+pillow
+numpy
