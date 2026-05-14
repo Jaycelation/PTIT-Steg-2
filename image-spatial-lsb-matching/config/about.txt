@@ -1,0 +1,3 @@
+Giau tin trong mien khong gian anh bang phuong phap LSB Matching.
+
+Lab nay huong dan sinh vien nhung va tach thong diep bang bien the LSB Matching, trong do pixel duoc cong hoac tru 1 khi LSB hien tai khong khop bit can giau.

@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+mkdir -p /home/student/.local /home/student/.local/bin /home/student/.local/result
+chown -R student:student /home/student/.local

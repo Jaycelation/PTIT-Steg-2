@@ -1,0 +1,8 @@
+{
+  "mode": "lsb_matching",
+  "image": "output/input.png",
+  "channel_mode": "L",
+  "seed": 2026,
+  "message_length_bytes": 68,
+  "output_stego": "work/stego.png"
+}

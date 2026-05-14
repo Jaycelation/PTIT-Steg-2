@@ -1,0 +1,5 @@
+Open a terminal in container `steg` and work in:
+
+    /home/student/image-spatial-lsb-matching
+
+Follow `README.md` to check the image, embed a message with LSB Matching, extract it, and report plus/minus-one metrics.
