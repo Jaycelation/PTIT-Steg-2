@@ -1,14 +1,14 @@
-# Instructor Notes
+# Ghi chú cho giảng viên
 
 Lab: Giấu tin trong miền không gian ảnh bằng phương pháp hoán vị điểm ảnh
 
-The checkwork is file-based. It does not inspect `.bash_history`.
+Checkwork của lab dựa trên file trong thư mục `work/`. Lab không kiểm tra `.bash_history`.
 
-Expected SHA-256:
+SHA-256 kỳ vọng:
 
 `7aad003b360006da660f867970e3c65ee552f64de9127fad95b081e15aebe948`
 
-The student workflow is:
+Quy trình sinh viên cần chạy:
 
 ```bash
 cd ~/image-spatial-permutation-embed

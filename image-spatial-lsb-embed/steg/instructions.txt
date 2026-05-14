@@ -1,5 +1,5 @@
-Mở terminal trong container steg và làm việc tại:
+Mở terminal trong container `steg` và làm việc tại:
 
     /home/student/image-spatial-lsb-embed
 
-Thực hiện theo README.md để kiểm tra ảnh, nhúng thông điệp bằng LSB, tách lại thông điệp và xem thống kê sai khác ảnh.
+Thực hiện theo `README.md` để kiểm tra ảnh, nhúng thông điệp bằng LSB, tách lại thông điệp và xem thống kê sai khác ảnh.

@@ -2,7 +2,7 @@
 
 Lab này dùng ảnh `output/input.png` và nhúng thông điệp vào bit ít quan trọng nhất của các kênh màu RGB.
 
-Chạy lần lượt:
+## Các bước thực hiện
 
 ```bash
 cd ~/image-spatial-lsb-embed
@@ -11,6 +11,8 @@ python3 tools/run_lsb_embed.py
 python3 tools/run_lsb_extract.py
 python3 tools/report_metrics.py
 ```
+
+## Kết quả tạo ra
 
 Các kết quả được ghi trong thư mục `work/`:
 

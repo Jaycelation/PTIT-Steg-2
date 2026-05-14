@@ -1,15 +1,15 @@
-# Huong dan bai image-spatial-lsb-embed
+# Hướng dẫn bài `image-spatial-lsb-embed`
 
-Ten tieng Viet: Giấu tin trong miền không gian ảnh bằng phương pháp LSB
+Tên tiếng Việt: Giấu tin trong miền không gian ảnh bằng phương pháp LSB
 
-## Muc tieu
+## Mục tiêu
 
-- Kiem tra anh dau vao va tinh capacity.
-- Nhung thong diep vao bit it quan trong nhat cua kenh mau RGB.
-- Tao anh stego va tach lai thong diep.
-- Kiem chung ket qua bang SHA-256 trong `instr_config/results.config`.
+- Kiểm tra ảnh đầu vào và tính capacity.
+- Nhúng thông điệp vào bit ít quan trọng nhất của kênh màu RGB.
+- Tạo ảnh stego và tách lại thông điệp.
+- Kiểm chứng kết quả bằng SHA-256 trong `instr_config/results.config`.
 
-## Cau truc quan trong
+## Cấu trúc quan trọng
 
 ```text
 image-spatial-lsb-embed/
@@ -26,7 +26,7 @@ image-spatial-lsb-embed/
       tools/
 ```
 
-## Lenh sinh vien chay trong Labtainer
+## Lệnh sinh viên chạy trong Labtainer
 
 ```bash
 cd ~/image-spatial-lsb-embed
@@ -38,33 +38,33 @@ python3 tools/report_metrics.py
 
 ## Checkwork
 
-Lab co 5 checkwork, deu dua tren file trong `work/`:
+Lab có 5 checkwork, đều dựa trên file trong `work/`:
 
-- `image_metadata_checked`: `work/image_metadata.txt` chua `IMAGE_METADATA_OK`.
-- `lsb_embed_ran`: `work/embed.log` chua `LSB_EMBED_OK`.
-- `lsb_extract_ran`: `work/extract.log` chua `LSB_EXTRACT_OK`.
-- `answer_file_created`: `work/answer_status.txt` chua `ANSWER_FILE_CREATED`.
-- `secret_recovered`: `work/answer.sha256` khop hash trong `results.config`.
+- `image_metadata_checked`: `work/image_metadata.txt` chứa `IMAGE_METADATA_OK`.
+- `lsb_embed_ran`: `work/embed.log` chứa `LSB_EMBED_OK`.
+- `lsb_extract_ran`: `work/extract.log` chứa `LSB_EXTRACT_OK`.
+- `answer_file_created`: `work/answer_status.txt` chứa `ANSWER_FILE_CREATED`.
+- `secret_recovered`: `work/answer.sha256` khớp hash trong `results.config`.
 
-## Dong goi GitHub tar
+## Đóng gói GitHub tar
 
-Tu thu muc repo:
+Từ thư mục repo:
 
 ```bash
 tar -cf image-spatial-lsb-embed.tar image-spatial-lsb-embed
 ```
 
-Kiem tra sach goi:
+Kiểm tra gói không chứa file sinh ra trong lúc làm bài:
 
 ```bash
 tar -tf image-spatial-lsb-embed.tar | grep -E "work/|answer|__pycache__|private|checker.py|generate.py|reference|LABTAINER|DEMO|EVALUATION"
 ```
 
-Ket qua mong doi: khong co output.
+Kết quả mong đợi: không có output.
 
 ## Build Docker image
 
-Chay tren may co Docker va Labtainer base image:
+Chạy trên máy có Docker và Labtainer base image:
 
 ```bash
 docker build \
@@ -78,18 +78,19 @@ docker build \
   --build-arg apt_source= \
   -t image-spatial-lsb-embed.steg.student .
 
+docker tag image-spatial-lsb-embed.steg.student jaycedang/image-spatial-lsb-embed.steg.student:latest
 docker tag image-spatial-lsb-embed.steg.student jaycedang/image-spatial-lsb-embed-steg-student:latest
+docker push jaycedang/image-spatial-lsb-embed.steg.student:latest
 docker push jaycedang/image-spatial-lsb-embed-steg-student:latest
 ```
 
-Neu Labtainer VM dung registry khac, thay `registry=labtainers` bang registry dang co trong VM.
+Tag `jaycedang/image-spatial-lsb-embed.steg.student:latest` là tag Labtainer tự kéo khi lab khai báo `REGISTRY jaycedang`.
 
-## Chay tren Labtainer VM
+## Chạy trên Labtainer VM
 
 ```bash
-cd ~/labtainer/labtainer-student
 imodule https://github.com/Jaycelation/PTIT-Steg-2/raw/refs/heads/master/image-spatial-lsb-embed.tar
-docker pull jaycedang/image-spatial-lsb-embed-steg-student:latest
-docker tag jaycedang/image-spatial-lsb-embed-steg-student:latest image-spatial-lsb-embed.steg.student
-labtainer -r image-spatial-lsb-embed
+labtainer image-spatial-lsb-embed
 ```
+
+Người dùng không cần chạy `docker pull` hoặc `docker tag` thủ công.

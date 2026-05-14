@@ -1,25 +1,25 @@
-# Huong dan bai image-spatial-permutation-embed
+# Hướng dẫn bài `image-spatial-permutation-embed`
 
-Ten tieng Viet: Giấu tin trong miền không gian ảnh bằng phương pháp hoán vị điểm ảnh
+Tên tiếng Việt: Giấu tin trong miền không gian ảnh bằng phương pháp hoán vị điểm ảnh
 
-## Muc tieu
+## Mục tiêu
 
-- Kiem tra anh grayscale dau vao.
-- Doc seed va tao ke hoach cap diem anh deterministic.
-- Ma hoa bit bang quan he thu tu cua tung cap pixel.
-- Tao anh stego va tach lai thong diep bang cung ke hoach cap pixel.
-- Kiem chung ket qua bang SHA-256 trong `instr_config/results.config`.
+- Kiểm tra ảnh grayscale đầu vào.
+- Đọc seed và tạo kế hoạch cặp điểm ảnh deterministic.
+- Mã hóa bit bằng quan hệ thứ tự của từng cặp pixel.
+- Tạo ảnh stego và tách lại thông điệp bằng cùng kế hoạch cặp pixel.
+- Kiểm chứng kết quả bằng SHA-256 trong `instr_config/results.config`.
 
-## Y tuong thuat toan
+## Ý tưởng thuật toán
 
-Lab dung pair-order permutation, khac voi LSB:
+Lab dùng pair-order permutation, khác với LSB:
 
 - bit `0`: pixel[i] <= pixel[j]
 - bit `1`: pixel[i] > pixel[j]
-- Neu quan he chua dung, script swap gia tri hai pixel.
-- Khi extract, script dung lai seed va danh sach cap pixel de doc quan he va khoi phuc bit.
+- Nếu quan hệ chưa đúng, script swap giá trị hai pixel.
+- Khi extract, script dùng lại seed và danh sách cặp pixel để đọc quan hệ và khôi phục bit.
 
-## Cau truc quan trong
+## Cấu trúc quan trọng
 
 ```text
 image-spatial-permutation-embed/
@@ -36,7 +36,7 @@ image-spatial-permutation-embed/
       tools/
 ```
 
-## Lenh sinh vien chay trong Labtainer
+## Lệnh sinh viên chạy trong Labtainer
 
 ```bash
 cd ~/image-spatial-permutation-embed
@@ -49,33 +49,33 @@ python3 tools/report_metrics.py
 
 ## Checkwork
 
-Lab co 5 checkwork, deu dua tren file trong `work/`:
+Lab có 5 checkwork, đều dựa trên file trong `work/`:
 
-- `image_metadata_checked`: `work/image_metadata.txt` chua `IMAGE_METADATA_OK`.
-- `permutation_plan_checked`: `work/permutation_plan.txt` chua `PERMUTATION_PLAN_OK`.
-- `permutation_embed_ran`: `work/embed.log` chua `PERMUTATION_EMBED_OK`.
-- `permutation_extract_ran`: `work/extract.log` chua `PERMUTATION_EXTRACT_OK`.
-- `secret_recovered`: `work/answer.sha256` khop hash trong `results.config`.
+- `image_metadata_checked`: `work/image_metadata.txt` chứa `IMAGE_METADATA_OK`.
+- `permutation_plan_checked`: `work/permutation_plan.txt` chứa `PERMUTATION_PLAN_OK`.
+- `permutation_embed_ran`: `work/embed.log` chứa `PERMUTATION_EMBED_OK`.
+- `permutation_extract_ran`: `work/extract.log` chứa `PERMUTATION_EXTRACT_OK`.
+- `secret_recovered`: `work/answer.sha256` khớp hash trong `results.config`.
 
-## Dong goi GitHub tar
+## Đóng gói GitHub tar
 
-Tu thu muc repo:
+Từ thư mục repo:
 
 ```bash
 tar -cf image-spatial-permutation-embed.tar image-spatial-permutation-embed
 ```
 
-Kiem tra sach goi:
+Kiểm tra gói không chứa file sinh ra trong lúc làm bài:
 
 ```bash
 tar -tf image-spatial-permutation-embed.tar | grep -E "work/|answer|__pycache__|private|checker.py|generate.py|reference|LABTAINER|DEMO|EVALUATION"
 ```
 
-Ket qua mong doi: khong co output.
+Kết quả mong đợi: không có output.
 
 ## Build Docker image
 
-Chay tren may co Docker va Labtainer base image:
+Chạy trên máy có Docker và Labtainer base image:
 
 ```bash
 docker build \
@@ -89,18 +89,19 @@ docker build \
   --build-arg apt_source= \
   -t image-spatial-permutation-embed.steg.student .
 
+docker tag image-spatial-permutation-embed.steg.student jaycedang/image-spatial-permutation-embed.steg.student:latest
 docker tag image-spatial-permutation-embed.steg.student jaycedang/image-spatial-permutation-embed-steg-student:latest
+docker push jaycedang/image-spatial-permutation-embed.steg.student:latest
 docker push jaycedang/image-spatial-permutation-embed-steg-student:latest
 ```
 
-Neu Labtainer VM dung registry khac, thay `registry=labtainers` bang registry dang co trong VM.
+Tag `jaycedang/image-spatial-permutation-embed.steg.student:latest` là tag Labtainer tự kéo khi lab khai báo `REGISTRY jaycedang`.
 
-## Chay tren Labtainer VM
+## Chạy trên Labtainer VM
 
 ```bash
-cd ~/labtainer/labtainer-student
 imodule https://github.com/Jaycelation/PTIT-Steg-2/raw/refs/heads/master/image-spatial-permutation-embed.tar
-docker pull jaycedang/image-spatial-permutation-embed-steg-student:latest
-docker tag jaycedang/image-spatial-permutation-embed-steg-student:latest image-spatial-permutation-embed.steg.student
-labtainer -r image-spatial-permutation-embed
+labtainer image-spatial-permutation-embed
 ```
+
+Người dùng không cần chạy `docker pull` hoặc `docker tag` thủ công.
